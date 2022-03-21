@@ -10,7 +10,7 @@ while True:
   else:
     print("Input is invalid, please try again.")
 if name_check == "y":
-  print("Welcome to my quiz, {}! This quiz will test your python programming skills.".format(username))
+  print("Welcome to my quiz! This quiz will test your python programming skills. There are a total of {} questions in this quiz. Good luck!") 
 elif name_check == "n":
   print("Welcome to my quiz! This quiz will test your python programming skills. There are a total of {} questions in this quiz. Good luck!") 
   # will insert length of quiz later
