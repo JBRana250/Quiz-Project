@@ -1,8 +1,10 @@
 # Component 1
 while True:
   name_check = input("Do you want to input a username or not? Input 'y' for yes and  'n' for no: ")
+  name_check = name_check.strip().lower()
   if name_check == "y":
     username = input("What do you want me to call you? Please input username in      letters only: ")
+    username = username.strip()
     if username.isalpha():
       print("Hello, {}!".format(username))
       break
