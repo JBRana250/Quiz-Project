@@ -47,5 +47,9 @@ def QuizIntro():
 
 # ******************************
 QuizIntro()
-
-  
+# Components 2 and 3 ***********
+Questions = {"What type of loop iterates over a sequence?":"for", "What function is used to get an input from the user?":"input"}
+length_of_quiz = len(Questions)
+for Question in Questions:
+  user_answer = input(Question)
+  print(user_answer)
