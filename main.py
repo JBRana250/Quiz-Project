@@ -53,4 +53,8 @@ length_of_quiz = len(Questions)
 for Question in Questions:
   user_answer = input(Question)
   correct_answer = Questions[Question]
-  print(correct_answer)
+  if user_answer == correct_answer:
+    print("Correct!")
+  else:
+    print("You got that wrong, the correct answer was {}.".format(correct_answer))
+  
