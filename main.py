@@ -52,4 +52,5 @@ Questions = {"What type of loop iterates over a sequence?: ":"for", "What functi
 length_of_quiz = len(Questions)
 for Question in Questions:
   user_answer = input(Question)
-  print(user_answer)
+  correct_answer = Questions[Question]
+  print(correct_answer)
