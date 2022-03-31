@@ -62,9 +62,9 @@ qten_answers = ["value", "syntax"]
 Questions = {"What type of loop iterates over a sequence?: ":qone_answers, "What function is used to get an input from the user?: ":qtwo_answers, "What symbol is used to assign a variable?: ":qthree_answers, "What brackets indicate a dictionary? Type the brackets directly into the input: ":qfour_answers, "Which type of loop repeats code as long as the condition is true?: ":qfive_answers, "What syntax is often used in exception handling, to try to run a piece of code?":qsix_answers, "What function is used to print text out into the console?: ":qseven_answers, "What symbol is used for multiplication in python?: ":qeight_answers, "What brackets indicate a list? Type the brackets directly into the input: ":qnine_answers, "What error occurs when the user inputs an invalid value type for a function?: ":qten_answers}
 
 length_of_quiz = len(Questions)
-question_num = 0
+question_num = 1
 for Question in Questions:
-  user_answer = input("/n Question {}: /n {}".format(question_num, Question))
+  user_answer = input("Question {}: {}".format(question_num, Question))
   user_answer = user_answer.strip().lower()
   answers_list = Questions[Question]
   correct_answer = answers_list[0]
