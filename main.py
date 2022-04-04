@@ -2,9 +2,6 @@
 def long_input(text):
   print(text, end='')
   return input()
-
-  
-
 qone_answers = ["for", "while"]
 qtwo_answers = ["input", "print"]
 qthree_answers = ["=", "=="]
@@ -24,11 +21,13 @@ def QuizIntro():
             name_check = input(
                 "Do you want to input a username or not? Input 'y' for yes and 'n' for no: "
             )
+            print("")
             name_check = name_check.strip().lower()
             if name_check == "y":
                 username = input(
                     "What do you want me to call you? Please input username in letters only: "
                 )
+                print("")
                 username = username.strip()
                 if username.isalpha():
                     return (username, name_check)
@@ -48,6 +47,7 @@ def QuizIntro():
         length_of_quiz)
     txtvers_indexzero_y = "Welcome to my quiz, {}! This quiz will test your python programming skills. There are a total of {} questions in this quiz. Good luck!".format(
         username, length_of_quiz)
+  
     text_versions = {
         txtvers_indexzero_n: txtvers_indexzero_y
     }  #dictionary storing different versions of text depending on if user input a username or not
@@ -60,6 +60,7 @@ def QuizIntro():
             print(text_versions.get(keys_list_txtvers[index]))
 
     name_check_print(0)
+    print("")
     # will insert length of quiz later
 # Components 2 and 3 **********
 def StartQuestions():
@@ -83,11 +84,14 @@ def StartQuestions():
     user_wrong = check_wrong_answers()
     if user_wrong[0] == 1:
       print("You got that wrong, you included a wrong answer in your answer which was '{}'.".format(user_wrong[1]))
+      print("")
     elif correct_answer in user_answer:
       print("Correct!")
+      print("")
       correct_answers = correct_answers + 1
     elif user_wrong[0] == 0:
       print("You got that wrong, the correct answer was {}.".format(correct_answer))
+      print("")
     question_num = question_num + 1
 
 #RUN*PROGRAM******************************
