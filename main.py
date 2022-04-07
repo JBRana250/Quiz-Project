@@ -21,24 +21,21 @@ qten_answers = ["value", "syntax"]
 Questions = {"What type of loop iterates over a sequence?: ":qone_answers, "What function is used to get an input from the user?: ":qtwo_answers, "What symbol is used to assign a variable?: ":qthree_answers, "What brackets indicate a dictionary? Type the brackets directly into the input: ":qfour_answers, "Which type of loop repeats code as long as the condition is true?: ":qfive_answers, "What syntax is often used in exception handling, to try to run a piece of code?: ":qsix_answers, "What function is used to print text out into the console?: ":qseven_answers, "What symbol is used for multiplication in python?: ":qeight_answers, "What brackets indicate a list? Type the brackets directly into the input: ":qnine_answers, "What error occurs when the user inputs an invalid value type for a function?: ":qten_answers}
 length_of_quiz = len(Questions)
 
-username = None
-
-txtvers_indexzero_n = "Welcome to my quiz! This quiz will test your python programming skills. There are a total of {} questions in this quiz. Good  luck!".format(length_of_quiz)
-txtvers_indexzero_y = "Welcome to my quiz, {}! This quiz will test your python programming skills. There are a total of {} questions in this quiz. Good luck!".format(username, length_of_quiz)
-
-# for when I need to update the username
-def format_text_versions(length_of_quiz, username):
+# for when I need to update certain placeholders inside a dictionary that stores different versions of text depending on if the user wanted a username or not.
+def format_text_versions(length_of_quiz, username, correct_answers):
   txtvers_indexzero_n = "Welcome to my quiz! This quiz will test your python programming skills. There are a total of {} questions in this quiz. Good  luck!".format(length_of_quiz)
   txtvers_indexzero_y = "Welcome to my quiz, {}! This quiz will test your python programming skills. There are a total of {} questions in this quiz. Good luck!".format(username, length_of_quiz)
-  text_versions = {txtvers_indexzero_n: txtvers_indexzero_y}
+  txtvers_indexone_n = "You got {} answer(s) right.".format(correct_answers)
+  txtvers_indexone_y = "Congratulations, {}! You got {} answer(s) correct.".format(username, correct_answers)
+  text_versions = {txtvers_indexzero_n: txtvers_indexzero_y, txtvers_indexone_n: txtvers_indexone_y}
   return text_versions
 
-#dictionary storing different versions of text depending on if user input a username or not. I used a dictionary in case I need to add more text versions.
-
-text_versions = {txtvers_indexzero_n: txtvers_indexzero_y}
-
-keys_list_txtvers = list(text_versions)
-
+# this function prints out a version of text depending on if the user wanted a username or not, using an updated_text_versions dictionary.
+def name_check_print(name_check, keys_list_txtvers, updated_text_versions, index):
+  if name_check == "n":                        
+    print(keys_list_txtvers[index])
+  else:                                                print(updated_text_versions.get(keys_list_txtvers[index]))
+    
 # Component 1 ********************
 
 def quiz_intro():
@@ -73,18 +70,15 @@ def quiz_intro():
     username_and_name_check = get_user()
     username = username_and_name_check[0]
     name_check = username_and_name_check[1]   
-
-    updated_text_versions = format_text_versions(length_of_quiz, username)
+    correct_answers = None
   
-    #prints text version depending on if user wanted username or not
-    def name_check_print(index):
-        if name_check == "n":
-            print(keys_list_txtvers[index])
-        else:                                    
-            print(updated_text_versions.get(keys_list_txtvers[index]))
+    updated_text_versions = format_text_versions(length_of_quiz, username, correct_answers)
+    keys_list_txtvers = list(updated_text_versions)
+
           
-    name_check_print(0)
+    name_check_print(name_check, keys_list_txtvers, updated_text_versions, 0)
     print("")
+    return name_check, keys_list_txtvers, username
   
 # Components 2 and 3 **********
 def start_questions():
@@ -127,12 +121,20 @@ def start_questions():
   return(correct_answers)
 
 # Component 4 *****************
-def print_correct_answers(correct_answers):
-    print("You got {} answers right.".format(correct_answers))
+def print_correct_answers(name_check, keys_list_txtvers, correct_answers, username):
+  updated_text_versions = format_text_versions(length_of_quiz, username, correct_answers)
+  keys_list_txtvers = list(updated_text_versions)
+  
+  name_check_print(name_check, keys_list_txtvers, updated_text_versions, 1)
 #RUN*PROGRAM******************************
 def run_quiz():
-  quiz_intro()
-  correct_answers = start_questions() #get num of correct ans
-  print_correct_answers(correct_answers)
+  quiz_intro_variables = quiz_intro()
+  name_check = quiz_intro_variables[0]
+  keys_list_txtvers = quiz_intro_variables[1]
+  username = quiz_intro_variables[2]
+  
+  correct_answers = start_questions()
+  
+  print_correct_answers(name_check, keys_list_txtvers, correct_answers, username)
 
 run_quiz()
