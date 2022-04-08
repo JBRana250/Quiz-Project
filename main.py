@@ -35,7 +35,17 @@ def name_check_print(name_check, keys_list_txtvers, updated_text_versions, index
   if name_check == "n":                        
     print(keys_list_txtvers[index])
   else:                                                print(updated_text_versions.get(keys_list_txtvers[index]))
-    
+
+#this is needed in global for it to work when the user tries again
+def check_wrong_answers(answers_list, user_answer):
+  for answer in answers_list:
+    if answer in user_answer:
+      user_wrong = 1
+      return user_wrong, answer
+  user_wrong = 0
+  answer = None
+  return user_wrong, answer
+  
 # Component 1 ********************
 
 def quiz_intro():
@@ -47,13 +57,16 @@ def quiz_intro():
             #if they want username
             if name_check == "y":
                 print("")
-                username = long_input("What do you want me to call you? Please input username in letters only: ")
-                print("")
-                username = username.strip()
-                if username.isalpha():
+                while True:
+                  username = long_input("What do you want me to call you? Please input username in letters only: ")
+                  username = username.strip()
+                  if username.isalpha():
+                    print("")  
                     return (username, name_check)
-                else:
+                    
+                  else:
                     print("Please input username in letters only.")
+                    print("")
 
             #if they dont want username
             elif name_check == "n":
@@ -95,18 +108,9 @@ def start_questions():
 
     #gets rid of right answer from ans list, only wrong answers remain
     answers_list.pop(0)
-    
-    def check_wrong_answers():
-      for answer in answers_list:
-        if answer in user_answer:
-          user_wrong = 1
-          return user_wrong, answer
-          break
-        user_wrong = 0
-        answer = None
-        return user_wrong, answer
         
-    user_wrong = check_wrong_answers()
+    user_wrong = check_wrong_answers(answers_list, user_answer)
+    print(user_wrong)
     
     if user_wrong[0] == 1: #if user include wrong answer
       print("You got that wrong, you included a wrong answer in your answer which was '{}'.".format(user_wrong[1]))
