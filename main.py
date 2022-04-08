@@ -107,6 +107,7 @@ def start_questions():
         return user_wrong, answer
         
     user_wrong = check_wrong_answers()
+    
     if user_wrong[0] == 1: #if user include wrong answer
       print("You got that wrong, you included a wrong answer in your answer which was '{}'.".format(user_wrong[1]))
       print("")
@@ -126,15 +127,33 @@ def print_correct_answers(name_check, keys_list_txtvers, correct_answers, userna
   keys_list_txtvers = list(updated_text_versions)
   
   name_check_print(name_check, keys_list_txtvers, updated_text_versions, 1)
+  print("")
 #RUN*PROGRAM******************************
+quiz_intro_variables = quiz_intro()
+name_check = quiz_intro_variables[0]
+keys_list_txtvers = quiz_intro_variables[1]
+username = quiz_intro_variables[2]
+
 def run_quiz():
-  quiz_intro_variables = quiz_intro()
-  name_check = quiz_intro_variables[0]
-  keys_list_txtvers = quiz_intro_variables[1]
-  username = quiz_intro_variables[2]
-  
   correct_answers = start_questions()
-  
   print_correct_answers(name_check, keys_list_txtvers, correct_answers, username)
 
-run_quiz()
+#Component 5 ***************************
+def loop_run_quiz():
+  while True:
+    run_quiz()
+    while True:
+      rerun_check = input("Do you want to try again? Input 'y' if yes, input 'n' if no: ")
+      if rerun_check == "y":
+        print("")
+        break
+      elif rerun_check == "n":
+        break
+      else:
+        print("Input invalid, please try again")
+        print("")
+    if rerun_check == "n":
+      break
+
+loop_run_quiz()
+    
