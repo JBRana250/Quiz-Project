@@ -26,7 +26,7 @@ def format_text_versions(length_of_quiz, username, correct_answers):
   txtvers_indexzero_n = "Welcome to my quiz! This quiz will test your python programming skills. There are a total of {} questions in this quiz. Good  luck!".format(length_of_quiz)
   txtvers_indexzero_y = "Welcome to my quiz, {}! This quiz will test your python programming skills. There are a total of {} questions in this quiz. Good luck!".format(username, length_of_quiz)
   txtvers_indexone_n = "You got {} answer(s) right.".format(correct_answers)
-  txtvers_indexone_y = "Congratulations, {}! You got {} answer(s) correct.".format(username, correct_answers)
+  txtvers_indexone_y = "You got {} answer(s) correct, {}.".format(correct_answers, username)
   text_versions = {txtvers_indexzero_n: txtvers_indexzero_y, txtvers_indexone_n: txtvers_indexone_y}
   return text_versions
 
@@ -38,10 +38,15 @@ def name_check_print(yes_no_check, keys_list_txtvers, updated_text_versions, ind
 
 #this is needed in global for it to work when the user tries again
 def check_wrong_answers(answers_list, user_answer):
-  for answer in answers_list:
+  ans_max = len(answers_list)
+  ans_num = 1
+  while ans_num != ans_max:
+    answer = answers_list[ans_num]
     if answer in user_answer:
       user_wrong = 1
       return user_wrong, answer
+    else:
+      ans_num = ans_num + 1
   user_wrong = 0
   answer = None
   return user_wrong, answer
@@ -94,7 +99,7 @@ def quiz_intro():
                 print("")
                 while True:
                   username = long_input("What do you want me to call you? Please input username in letters only: ")
-                  username = username.strip()
+                  username = username.replace(" ", "")
                   if username.isalpha():
                     print("")  
                     return (username, yes_no_check)
@@ -145,7 +150,6 @@ def start_questions():
     correct_answer = answers_list[0]
 
     #gets rid of right answer from ans list, only wrong answers remain
-    answers_list.pop(0)
         
     user_wrong = check_wrong_answers(answers_list, user_answer)
   
